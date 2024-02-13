@@ -1,0 +1,4 @@
+dns-resolver/node_modules
+dns-resolver/npm-debug.log
+dns-resolver/*.log
+dns-resolver/.DS_Store

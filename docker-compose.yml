@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  dns-resolver:
+    image: dns-resolver:1.0.0
+    build: .
+    env_file:
+      - .env
+    container_name: dns-resolver
+    ports:
+      - "127.0.0.1:3000:3000"
+    command: npm start

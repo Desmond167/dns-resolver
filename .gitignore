@@ -1,0 +1,32 @@
+# Dependency directories
+dns-resolver/node_modules/
+
+# Generated files
+dns-resolver/dist/
+dns-resolver/build/
+dns-resolver/*.log
+dns-resolver/*.pid
+dns-resolver/*.seed
+dns-resolver/*.pid.lock
+
+# OS generated files
+dns-resolver/.DS_Store
+dns-resolver/.DS_Store?
+dns-resolver/._*
+
+# User-specific files
+dns-resolver/npm-debug.log
+dns-resolver/yarn-debug.log*
+dns-resolver/yarn-error.log*
+dns-resolver/.pnpm-debug.log
+dns-resolver/*.pnp.js
+
+dns-resolver/# Environment variables
+dns-resolver/.env
+
+# IDE and text editor files
+dns-resolver/.vscode/
+dns-resolver/.idea/
+
+# Ignore package-lock files
+dns-resolver/package-lock.json

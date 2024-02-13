@@ -1,0 +1,28 @@
+{
+  "name": "dns-resolver",
+  "version": "1.0.0",
+  "description": "The DNS Resolver is a backend application developed to efficiently resolve Domain Name System (DNS) queries. Built using Node.js, this application provides a robust and scalable solution for translating domain names into IP addresses.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Desmond167/dns-resolver.git"
+  },
+  "keywords": [
+    "dns",
+    "dns-resolver",
+    "dns-to-ip"
+  ],
+  "author": "Soham Chakraborty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Desmond167/dns-resolver/issues"
+  },
+  "homepage": "https://github.com/Desmond167/dns-resolver#readme",
+  "dependencies": {
+    "fastify": "^4.26.0"
+  }
+}
