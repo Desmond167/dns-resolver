@@ -1,10 +1,10 @@
 import { pingHandler } from '../controllers/baseController.js'
-import { userRoutes } from './userRouters.js'
+import { domainRoutes } from './domainRouters.js'
 
 // Declare a route
 function routes (fastify, opts, done) {
     fastify.get('/ping', pingHandler)
-    fastify.register(userRoutes, { prefix: '/api/v1' })
+    fastify.register(domainRoutes, { prefix: '/api/v1' })
     done()
 }
 

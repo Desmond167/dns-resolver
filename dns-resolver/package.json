@@ -23,8 +23,6 @@
   },
   "homepage": "https://github.com/Desmond167/dns-resolver#readme",
   "dependencies": {
-    "fastify": "^4.26.0",
-    "sequelize": "^6.37.0",
-    "sqlite3": "^5.1.7"
+    "fastify": "^4.26.0"
   }
 }
