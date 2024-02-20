@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Desmond167/dns-resolver#readme",
   "dependencies": {
-    "fastify": "^4.26.0"
+    "fastify": "^4.26.0",
+    "redis": "^4.6.13"
   }
 }

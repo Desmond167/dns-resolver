@@ -3,12 +3,14 @@ import Fastify from 'fastify'
 import { Config } from './config/config.js'
 import { LoggerConfig } from './config/logger.js'
 import { routes } from './src/routes/baseRouters.js'
+import { connectRedis } from './src/utils/onreadyHooks.js'
 
 const fastify = Fastify({
   logger: LoggerConfig[Config.ENVIRONMENT]
 })
 
 fastify.register(routes, { prefix: '/' })
+fastify.addHook('onReady', connectRedis)
 
 // Run the server!
 try {

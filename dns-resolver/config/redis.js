@@ -1,7 +1,7 @@
-import { Config } from './config';
-import redis from 'redis';
+import { Config } from './config.js';
+import { createClient } from 'redis';
 
-const redisClient = redis.createClient({
+const redisClient = createClient({
     host: Config.REDIS_HOST,
     port: Config.REDIS_PORT,
   });
