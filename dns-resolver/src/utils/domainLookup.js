@@ -1,9 +1,9 @@
 import dns from 'dns';
 
-const lookup = (domain, family, resolver) => new Promise((resolve, reject) => {
+const lookup = (domain, family, resolver, all=true) => new Promise((resolve, reject) => {
   const options = {
     family: family || 0, // 0 means both IPv4 and IPv6
-    all: true,
+    all: all,
     resolver: [resolver],
   };
 
@@ -15,5 +15,6 @@ const lookup = (domain, family, resolver) => new Promise((resolve, reject) => {
     }
   });
 });
+
 
 export { lookup }

@@ -11,4 +11,4 @@ COPY dns-resolver/package*.json ./
 RUN npm install
 
 # Copy the application code to the working directory
-COPY dns-resolver/* .
+COPY dns-resolver/ .

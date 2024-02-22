@@ -1,4 +1,5 @@
 import { redisClient } from "../../config/redis.js";
+import { Config } from "../../config/config.js";
 
 function connectRedis(done) {
     try {

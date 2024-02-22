@@ -9,7 +9,11 @@ services:
     container_name: dns-resolver
     ports:
       - "127.0.0.1:3000:3000"
+    depends_on:
+      - redis
     command: npm start
+    networks:
+      - redis-network
 
   redis:
     image: "redis:7.0-alpine"
@@ -20,3 +24,8 @@ services:
     volumes:
       - ./redis-data:/data
     command: redis-server --appendonly yes
+    networks:
+      - redis-network
+
+networks:
+  redis-network:

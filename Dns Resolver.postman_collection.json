@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "c3e0e647-a232-45e5-8019-89256f17cf1a",
+		"name": "Dns Resolver",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28618702"
+	},
+	"item": [
+		{
+			"name": "Domain Lookup",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"domain\": \"netflix.com\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/v1/domain/lookup?domain=netflix.com",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"domain",
+						"lookup"
+					],
+					"query": [
+						{
+							"key": "domain",
+							"value": "netflix.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Domain Resolve ( IPV4 )",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"domain\": \"netflix.com\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/v1/domain/resolve/4?domain=netflix.com",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"domain",
+						"resolve",
+						"4"
+					],
+					"query": [
+						{
+							"key": "domain",
+							"value": "netflix.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Domain Resolve ( IPV6 )",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"domain\": \"netflix.com\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/v1/domain/resolve/6?domain=netflix.com",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"domain",
+						"resolve",
+						"6"
+					],
+					"query": [
+						{
+							"key": "domain",
+							"value": "netflix.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

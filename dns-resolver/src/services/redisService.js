@@ -2,19 +2,17 @@ import { redisClient } from "../../config/redis.js";
 
 // Function to set a key-value pair in Redis
 const redisSet = async (key, value, ttl = null) => {
-    let attrs = {};
-
     // Ensure redisClient is properly initialized before calling set
     if (!redisClient) {
         throw new Error('Redis client is not initialized.');
     }
 
-    if (ttl) {
-        attrs.EX = ttl;
-    }
-
     try {
-        await redisClient.set(key, value, attrs);
+        let transaction = redisClient.multi().set(key, value);
+        if (ttl) {
+            transaction = transaction.expire(key, ttl);
+        }
+        await transaction.exec();
     } catch (error) {
         throw new Error(error);
     }
@@ -42,20 +40,18 @@ const redisGet = async (key) => {
 
 
 // Function to set a key-value hash pair in Redis
-const redisHset = async (key, value, ttl = null) => {
-    let attrs = {};
-
+const redisHset = async (key, value, ttl=null) => {
     // Ensure redisClient is properly initialized before calling set
     if (!redisClient) {
         throw new Error('Redis client is not initialized.');
     }
 
-    if (ttl) {
-        attrs.EX = ttl;
-    }
-
     try {
-        await redisClient.hSet(key, value, attrs);
+        let transaction = redisClient.multi().hSet(key, value);
+        if (ttl) {
+            transaction = transaction.expire(key, ttl);
+        }
+        await transaction.exec();
     } catch (error) {
         throw new Error(error);
     }
