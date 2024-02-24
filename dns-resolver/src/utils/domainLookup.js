@@ -8,7 +8,11 @@ const lookup = (domain, family, resolver, all=true) => new Promise((resolve, rej
   };
 
   dns.lookup(domain, options, (err, addresses) => {
+
     if (err) {
+      if (err.code == 'ENOTFOUND') {
+        resolve(family === 0 ? [] : '');
+      }
       reject(err);
     } else {
       resolve(addresses);

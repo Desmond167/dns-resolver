@@ -8,13 +8,19 @@ async function domainLookupHandler (request, reply) {
     try {
         let redisData = await redisHgetAll(request.query.domain);
 
-        if (!redisData || !redisData.ipv4 || redisData.ipv6) {
-            const lookupResult = await lookup(request.query.domain, request.query.family, Config.CUSTOM_RESOLVER_IP );
+        if (!redisData || !redisData.ipv4) {
+            const lookupResult = await lookup(request.query.domain, request.query.family, Config.CUSTOM_RESOLVER_IP, true );
             const parsedResult = parseLookupResult(lookupResult);
 
             redisData = {}
-            redisData.ipv4 = parsedResult.ipv4.join(',');
-            redisData.ipv6 = parsedResult.ipv6.join(',');
+
+            if (parsedResult.ipv4) {
+                redisData.ipv4 = parsedResult.ipv4.join(',');
+            }
+
+            if (parsedResult.ipv6) {
+                redisData.ipv6 = parsedResult.ipv6.join(',');
+            }
 
             await redisHset(request.query.domain, redisData, Config.CACHE_EXPIRE_SECONDS);
         }
@@ -25,13 +31,18 @@ async function domainLookupHandler (request, reply) {
             message: 'Lookup successful',
             data: { 
                 'domain': request.query.domain,
-                'ipv4': redisData.ipv4.split(','),
-                'ipv6': redisData.ipv6.split(','),
+                'ipv4': redisData.ipv4 ? redisData.ipv4.split(',') : [],
+                'ipv6': redisData.ipv6 ? redisData.ipv6.split(',') : []
             } 
         });
     } catch (error) {
 
         request.log.error(error.message)
+        reply.code(500)
+        .send({ 
+            error: true, 
+            message: error.message,
+        });
     }
 }
 
@@ -42,6 +53,16 @@ async function domainResolve4Handler (request, reply) {
 
         if (!redisData || !redisData.ipv4Resolve) {
             const resolvedIpv4 = await lookup(request.query.domain, 4, Config.CUSTOM_RESOLVER_IP, false );
+
+            if (!resolvedIpv4) {
+                reply.code(404)
+                .send({ 
+                    error: false, 
+                    message: `No ipv4 found for ${request.query.domain}`,
+                });
+
+                return
+            }
 
             redisData = {}
             redisData.ipv4Resolve = resolvedIpv4;
@@ -61,6 +82,11 @@ async function domainResolve4Handler (request, reply) {
     } catch (error) {
 
         request.log.error(error.message)
+        reply.code(500)
+        .send({ 
+            error: true, 
+            message: error.message,
+        });
     }
 }
 
@@ -71,6 +97,16 @@ async function domainResolve6Handler (request, reply) {
 
         if (!redisData || !redisData.ipv6Resolve) {
             const resolvedIpv6 = await lookup(request.query.domain, 6, Config.CUSTOM_RESOLVER_IP, false );
+
+            if (!resolvedIpv6) {
+                reply.code(404)
+                .send({ 
+                    error: false, 
+                    message: `No ipv6 found for ${request.query.domain}`,
+                });
+
+                return
+            }
 
             redisData = {}
             redisData.ipv6Resolve = resolvedIpv6;
@@ -90,6 +126,11 @@ async function domainResolve6Handler (request, reply) {
     } catch (error) {
 
         request.log.error(error.message)
+        reply.code(500)
+        .send({ 
+            error: true, 
+            message: error.message,
+        });
     }
 }
 
